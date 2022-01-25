@@ -1,6 +1,6 @@
 export interface User {
-    username: string;
-    displyaName: string;
+    userName: string;
+    displayName: string;
     token: string;
     image?: string;
 }
