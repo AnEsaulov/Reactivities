@@ -63,12 +63,26 @@ namespace API
             app.UseXfo(opt => opt.Deny());
             app.UseCsp(opt => opt
               .BlockAllMixedContent()
-              .StyleSources(s => s.Self().CustomSources("https://fonts.googleapis.com"))
-              .FontSources(s => s.Self().CustomSources("https://fonts.gstatic.com", "data:"))
+              .StyleSources(s => s.Self().CustomSources(
+                  "https://fonts.googleapis.com",
+                  "sha256-yChqzBduCCi4o4xdbXRXh4U/t1rP4UUUMJt+rB+ylUI="
+                  ))
+              .FontSources(s => s.Self().CustomSources(
+                  "https://fonts.gstatic.com", 
+                  "data:"
+                  ))
               .FormActions(s => s.Self())
               .FrameAncestors(s => s.Self())
-              .ImageSources(s => s.Self().CustomSources("https://res.cloudinary.com"))
-              .ScriptSources(s => s.Self().CustomSources("sha256-Nituz8yoGr70dO7B09poDbYJRubJNl2JA3a4E+knf1o="))
+              .ImageSources(s => s.Self().CustomSources(
+                  "https://res.cloudinary.com",
+                  "https://www.facebook.com",
+                  "https://platform-lookaside.fbsbx.com"
+                  ))
+              .ScriptSources(s => s.Self().CustomSources(
+                  "sha256-Nituz8yoGr70dO7B09poDbYJRubJNl2JA3a4E+knf1o=",
+                  "https://connect.facebook.net",
+                  "sha256-RCeIF0dgAuYZSuK1WUwTZazF+tgBJ407zsC8AOSk1+o="
+                ))
             );
 
             if (env.IsDevelopment())
