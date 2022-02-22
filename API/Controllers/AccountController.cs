@@ -158,8 +158,5 @@ namespace API.Controllers
             };
         }
 
-        private class JsonConvert
-        {
-        }
     }
 }
