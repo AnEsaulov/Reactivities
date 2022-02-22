@@ -128,7 +128,7 @@ namespace API.Controllers
             {
                 DisplayName = (string)fbInfo.name,
                 Email = (string)fbInfo.email,
-                UserName = (string)fbInfo.id,
+                UserName = (string)fbInfo.id/*,
                 Photos = new List<Photo>
                 {
                     new Photo
@@ -137,7 +137,7 @@ namespace API.Controllers
                         Url = (string)fbInfo.picture.data.url,
                         IsMain = true
                     }
-                }
+                }*/
             };
 
             var result = await _userManager.CreateAsync(user);
