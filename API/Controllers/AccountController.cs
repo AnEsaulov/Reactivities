@@ -110,7 +110,7 @@ namespace API.Controllers
 
             if (!verifyToken.IsSuccessStatusCode) return Unauthorized();
 
-            var fbUrl = $"me?access_token={accessToken}&fields=name, email,picture.width(100).height(100)";
+            var fbUrl = $"me?access_token={accessToken}&fields=name,email,picture.width(100).height(100)";
 
             var response = await _httpClient.GetAsync(fbUrl);
 
@@ -128,7 +128,7 @@ namespace API.Controllers
             {
                 DisplayName = (string)fbInfo.name,
                 Email = (string)fbInfo.email,
-                UserName = (string)fbInfo.id/*,
+                UserName = (string)fbInfo.id,
                 Photos = new List<Photo>
                 {
                     new Photo
@@ -137,7 +137,7 @@ namespace API.Controllers
                         Url = (string)fbInfo.picture.data.url,
                         IsMain = true
                     }
-                }*/
+                }
             };
 
             var result = await _userManager.CreateAsync(user);
