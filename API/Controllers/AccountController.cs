@@ -124,11 +124,17 @@ namespace API.Controllers
 
             if (user != null) return CreateUserObject(user);
 
+            var email = (string)fbInfo.email;
+
+            if (email == null) {
+                return Unauthorized();
+            }
+            
             user = new AppUser
             {
                 DisplayName = (string)fbInfo.name,
-                Email = (string)fbInfo.email,
-                UserName = (string)fbInfo.id,
+                Email = email,
+                UserName = username,
                 Photos = new List<Photo>
                 {
                     new Photo
