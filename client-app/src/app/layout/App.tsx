@@ -16,6 +16,8 @@ import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
 import ModalContainer from '../common/modals/ModalContainer';
 import ProfilePage from '../../features/profiles/ProfilePage';
+import RegisterSuccess from '../../features/users/RegisterSuccess';
+import ConfirmEmail from '../../features/users/ConfirmEmail';
 
 function App() {
   const location = useLocation();
@@ -46,6 +48,8 @@ function App() {
           <Route path='/profiles/:username' element={<ProfilePage />} />
           <Route path='/errors' element={<TestErrors />} />
           <Route path='/server-error' element={<ServerError />} />
+          <Route path='/account/registerSuccess' element={<RegisterSuccess />} />
+          <Route path='/account/verifyEmail' element={<ConfirmEmail />} />
           <Route path='/login' element={<LoginForm />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
