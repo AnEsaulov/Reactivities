@@ -29,16 +29,26 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <script>
-      window.fbAsyncInit = function() {
+      window.fbAsyncInit = function () {
         FB.init({
-          appId            : '2954019971576490',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v13.0'
+          appId: '2954019971576490',
+          cookie: true,
+          xfbml: true,
+          version: 'v13.0'
         });
+
+        FB.AppEvents.logPageView();
+
       };
+
+      (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) { return; }
+        js = d.createElement(s); js.id = id;
+        js.src = "https://connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
     </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
     <div id="root"></div>
     <!--
       This HTML file is a template.

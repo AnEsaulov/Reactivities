@@ -73,6 +73,7 @@ export default class UserStore {
                 this.fbAccessToken = response.authResponse.accessToken;
             }
         })
+        
     }
 
     facebookLogin = () => {
