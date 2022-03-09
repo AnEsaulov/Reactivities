@@ -1,17 +1,20 @@
 import { Formik, Form, ErrorMessage} from "formik";
 import { observer } from "mobx-react-lite";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Header, Label } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 
 export default observer(function LoginForm() {
     const {userStore} = useStore();
+    const navigate = useNavigate();
+    //navigate('/activities')
     return (
         <Formik 
             initialValues={{email: '', password: '', error: null}}
-            onSubmit={(values, {setErrors}) => userStore.login(values).catch(error => 
-                setErrors({error: error.response.data}))}
+            onSubmit={(values, {setErrors}) => userStore.login(values).then(() => navigate('/activities'))
+                .catch(error => setErrors({error: error.response.data}))}
         >
             {({handleSubmit, isSubmitting, errors}) => (
                 <Form className="ui form" onSubmit={handleSubmit} autoComplete='off'>

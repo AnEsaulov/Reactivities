@@ -1,3 +1,5 @@
+dotnet publish -c Release -o publish --self-contained false Reactivities.sln
+
 *** LINUX SERVER SETUP USING A NEWLY CREATED DIGITAL OCEAN LAMP SERVER ***
 
 1. ssh root@ipaddressOfLinuxServer (follow instructions to change password)

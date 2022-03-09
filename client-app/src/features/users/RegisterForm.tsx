@@ -6,14 +6,16 @@ import MyTextInput from "../../app/common/form/MyTextInput";
 import { useStore } from "../../app/stores/store";
 import * as Yup from 'yup';
 import ValidationErrors from "../errors/ValidationErrors";
+import { useNavigate } from "react-router-dom";
 
 export default observer(function RegisterForm() {
     const {userStore} = useStore();
+    const navigate = useNavigate();
     return (
         <Formik 
             initialValues={{displayName: '', username: '', email: '', password: '', error: null}}
-            onSubmit={(values, {setErrors}) => userStore.register(values).catch(error => 
-                setErrors({error}))}
+            onSubmit={(values, {setErrors}) => userStore.register(values).then(() => navigate(`/account/registerSuccess?email=${values.email}`))
+                .catch(error => setErrors({error}))}
             validationSchema={Yup.object({
                 displayName: Yup.string().required(),
                 username: Yup.string().required(),

@@ -5,13 +5,17 @@ import { User, UserFormValues } from "../models/user";
 import { store } from "./store";
 
 export default class UserStore {
+    
     user: User | null = null;
     fbAccessToken: string | null = null;
     fbLoading = false;
     refreshTokenTimeout: any;
 
+
+
     constructor() {
-        makeAutoObservable(this)
+        makeAutoObservable(this);
+        
     }
 
     get isLoggedIn() {
@@ -24,7 +28,7 @@ export default class UserStore {
             store.commonStore.setToken(user.token);
             this.startRefreshTokenTimer(user);
             runInAction(() => this.user = user);
-            history.push('/activities');
+            //history.push('/activities');
             store.modalStore.closeModal();
         } catch (error) {
             throw error;
@@ -35,7 +39,8 @@ export default class UserStore {
         store.commonStore.setToken(null);
         window.localStorage.removeItem('jwt');
         this.user = null;
-        history.push('/');
+        //history.push('/');
+
     }
 
     getUser = async () => {
@@ -52,7 +57,7 @@ export default class UserStore {
     register = async (creds: UserFormValues) => {
         try {
             await agent.Account.register(creds);
-            history.push(`/account/registerSuccess?email=${creds.email}`);
+            //history.push(`/account/registerSuccess?email=${creds.email}`);
             store.modalStore.closeModal();
         } catch (error) {
             throw error;

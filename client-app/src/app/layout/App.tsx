@@ -22,6 +22,7 @@ import ConfirmEmail from '../../features/users/ConfirmEmail';
 function App() {
   const location = useLocation();
   const {commonStore, userStore} = useStore();
+  
 
   useEffect(() => {
     if (commonStore.token) {
@@ -32,14 +33,17 @@ function App() {
   }, [commonStore, userStore])
 
   if (!commonStore.appLoaded) return <LoadingComponent content='Loading app ...' />
-
+  
+  var marginValue = '7em'; 
+  if (location.pathname === '/') marginValue = '0em';
+ 
   return (
     <>
       <ToastContainer position='bottom-right' hideProgressBar />
       <ModalContainer />
-      <NavBar />
-      <Container style={{marginTop: '7em'}}> 
-        <Routes>
+      {location.pathname !== '/' && <NavBar /> }
+      <Container style={{marginTop: marginValue}}> 
+         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/activities' element={<ActivityDashboard />} />
           <Route path='/activities/:id' element={<ActivityDetails />} />
@@ -54,6 +58,7 @@ function App() {
           <Route path='*' element={<NotFound />} />
         </Routes>
       </Container>
+      
     </>
   );
 }

@@ -38,8 +38,6 @@ axios.interceptors.response.use(async response => {
             }
             if (config.method === 'get' && data.errors.hasOwnProperty('id')) {
                 history.push('/not-found');
-                history.push('/not-found');
-                history.go(-1);
             }
             if (data.errors) {
                 const modalStateErrors = [];
@@ -59,14 +57,10 @@ axios.interceptors.response.use(async response => {
             break;
         case 404:
             history.push('/not-found');
-            history.push('/not-found');
-            history.go(-1);
             break;
         case 500:
             store.commonStore.setServerError(data);
             history.push('/server-error');
-            history.push('/server-error');
-            history.go(-1);
             break;
     }
     return Promise.reject(error);
