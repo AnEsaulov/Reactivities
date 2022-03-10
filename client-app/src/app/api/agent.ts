@@ -93,7 +93,9 @@ const Account = {
     refreshToken: () => requests.post<User>('/account/refreshToken', {}),
     verifyEmail: (token: string, email: string) => 
         requests.post<void>(`/account/verifyEmail?token=${token}&email=${email}`, {}),
-    resendEmailConfirmation: (email: string) => requests.get(`/account/resendEmailConfirmationLink?email=${email}`)
+    resendEmailConfirmation: (email: string) => requests.get(`/account/resendEmailConfirmationLink?email=${email}`),
+    sendResetPasswordLink: (email: string) => requests.get(`/account/sendResetPasswordLink?email=${email}`),
+    resetPassword: (token: string, email: string, password: string) => requests.post<void>(`/account/resetPassword?token=${token}&email=${email}&password=${password}`, {}),
 }
 
 const Profiles = {

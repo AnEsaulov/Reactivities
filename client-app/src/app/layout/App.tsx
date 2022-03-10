@@ -18,6 +18,9 @@ import ModalContainer from '../common/modals/ModalContainer';
 import ProfilePage from '../../features/profiles/ProfilePage';
 import RegisterSuccess from '../../features/users/RegisterSuccess';
 import ConfirmEmail from '../../features/users/ConfirmEmail';
+import EnterNewPasswordForm from '../../features/users/EnterNewPasswordForm';
+import NewPasswordSuccess from '../../features/users/NewPasswordSuccess';
+import SendNewPasswordUrlSuccess from '../../features/users/SendNewPasswordUrlSuccess';
 
 function App() {
   const location = useLocation();
@@ -52,8 +55,13 @@ function App() {
           <Route path='/profiles/:username' element={<ProfilePage />} />
           <Route path='/errors' element={<TestErrors />} />
           <Route path='/server-error' element={<ServerError />} />
-          <Route path='/account/registerSuccess' element={<RegisterSuccess />} />
-          <Route path='/account/verifyEmail' element={<ConfirmEmail />} />
+          <Route path='/account'>
+            <Route path='registerSuccess' element={<RegisterSuccess />} />
+            <Route path='verifyEmail' element={<ConfirmEmail />} />
+            <Route path='newPasswordForm' element={<EnterNewPasswordForm />} />
+            <Route path='newPasswordSuccess' element={<NewPasswordSuccess />} />
+            <Route path='sendNewPasswordUrlSuccess' element={<SendNewPasswordUrlSuccess />} />
+          </Route>
           <Route path='/login' element={<LoginForm />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

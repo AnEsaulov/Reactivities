@@ -64,6 +64,24 @@ export default class UserStore {
         }
     }
 
+    sendResetPasswordLink = async (creds: UserFormValues) => {
+        try {
+            await agent.Account.sendResetPasswordLink(creds.email);
+            store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }    
+
+    resetPassword = async (token: string, email: string, password: string) => {
+        try {
+            await agent.Account.resetPassword(token, email, password);
+            store.modalStore.closeModal();
+        } catch (error) {
+            throw error;
+        }
+    }  
+
     setImage = (image: string) => {
         if (this.user) this.user.image = image;
     }

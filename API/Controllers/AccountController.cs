@@ -143,6 +143,41 @@ namespace API.Controllers
             return Ok("Email verification link resent");
         }
 
+        [AllowAnonymous]
+        [HttpGet("sendResetPasswordLink")]
+        public async Task<IActionResult> SendResetPasswordLink(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null) return Unauthorized("Invalid email");
+
+            var origin = Request.Headers["origin"];
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            token = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+
+            var resetPasswordUrl = $"{origin}/account/newPasswordForm?token={token}&email={user.Email}";
+            var message = $"<p>Please click the below link to reset password:</p><p><a href='{resetPasswordUrl}'>Click to reset password</a></p>";
+
+            await _emailSender.SendEmailAsync(user.Email, "Reset password to Reactivities service", message);
+
+            return Ok("Reset password link sent");
+        }
+
+        [AllowAnonymous]
+        [HttpPost("resetPassword")]
+        public async Task<IActionResult> ResetPassword(string token, string email, string password)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user == null) return Unauthorized();
+            var decodedTokenBytes = WebEncoders.Base64UrlDecode(token);
+            var decodedToken = Encoding.UTF8.GetString(decodedTokenBytes);
+            var result = await _userManager.ResetPasswordAsync(user, decodedToken, password);
+
+            if (!result.Succeeded) return BadRequest("Could not set new password. Password must be complex.");
+
+            return Ok("New password set - you can now login");
+        }
+
         [Authorize]
         [HttpGet]
         public async Task<ActionResult<UserDto>> GetCurrentUser()
