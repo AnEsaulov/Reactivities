@@ -4,7 +4,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Header, Label, Segment } from "semantic-ui-react";
 import MyTextInput from "../../app/common/form/MyTextInput";
-import modalStore from "../../app/stores/modalStore";
 import { useStore } from "../../app/stores/store";
 import ResetPasswordForm from "./ResetPasswordForm";
 
