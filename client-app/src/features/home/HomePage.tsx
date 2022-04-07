@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Header, Segment, Image, Button, Divider } from "semantic-ui-react";
 import { useStore } from "../../app/stores/store";
 import LoginForm from "../users/LoginForm";
@@ -8,6 +8,7 @@ import RegisterForm from "../users/RegisterForm";
 
 export default observer( function HomePage() {
     const {userStore, modalStore} = useStore();
+    const navigate = useNavigate();
     return (
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
@@ -38,7 +39,11 @@ export default observer( function HomePage() {
                             color='facebook'
                             content='Login with Facebook'
                             onClick={userStore.facebookLogin}
-                        />              
+                        />     
+                        <Button onClick={() => userStore.login({email: 'cys64151@jiooq.com', password: 'Pa$$w0rd'})
+                            .then(() => navigate('/activities'))} size='huge' inverted>
+                            Login as Guest
+                        </Button>          
                     </>
 
                 )}
